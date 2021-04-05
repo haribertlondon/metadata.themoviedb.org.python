@@ -125,4 +125,5 @@ def _set_params(append_to_response, language):
         params['language'] = language
     if append_to_response is not None:
         params['append_to_response'] = append_to_response
+    params['include_adult'] = 'true'
     return params
