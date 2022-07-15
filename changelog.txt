@@ -1,3 +1,30 @@
+v1.6.2 (2022-04-10)
+- Fix: IMDB ratings
+
+v1.6.1 (2022-01-09)
+- Feature: fanart prioritization option
+
+v1.6.0 (2021-12-24)
+- Feature: fallback to English language for Fanart.tv artwork
+
+v1.5.1 (2021-10-19)
+- Fix: search error when no year
+
+v1.5.0 (2021-10-16)
+- Feature: downloading logos from tmdb
+- Feature: search language option added
+- Change: searching movies from different years if not found
+- Fix: don't error when all fanart disabled
+- Fix: don't try to fetch movie set artwork from Fanart.TV if movie is not part of set
+- skip IMDB rating tests
+
+v1.4.0 (2021-07-10)
+- Feature: update to new IMDB page layout
+- Feature: update language files and translation system
+
+v1.3.3 (2021-05-16)
+- Fix: fix collection image fallback from TMDB
+
 v1.3.2 (2021-03-13)
 - Change: improve best match selection
 - Change: poster language fallback to highest rated
