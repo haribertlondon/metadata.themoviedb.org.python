@@ -1,3 +1,4 @@
+# coding=utf-8
 import json
 import sys
 import xbmc
@@ -29,6 +30,7 @@ def get_tmdb_scraper(settings):
 def search_for_movie(title, year, handle, settings):
     log("Find movie with title '{title}' from year '{year}'".format(title=title, year=year), xbmc.LOGINFO)
     title = _strip_trailing_article(title)
+    title_umlaut = title.replace("ae","ä").replace("ue","ü").replace("oe","ö").replace("Ae","ä").replace("Ue","ü").replace("Oe","ö")
     scraper = get_tmdb_scraper(settings)
 
     search_results = scraper.search(title, year)
@@ -39,6 +41,10 @@ def search_for_movie(title, year, handle, settings):
             search_results = scraper.search(title,str(int(year)+1))
         if not search_results:
             search_results = scraper.search(title)
+        if not search_results and title != title_umlaut:
+            search_results = scraper.search(title_umlaut, year)
+        if not search_results and title != title_umlaut:
+            search_results = scraper.search(title_umlaut)
     if not search_results:
         return
 
