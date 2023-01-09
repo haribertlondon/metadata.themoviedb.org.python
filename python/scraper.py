@@ -35,12 +35,12 @@ def search_for_movie(title, year, handle, settings):
 
     search_results = scraper.search(title, year)
     if not search_results and year is not None:
+        if not search_results and title != title_umlaut:
+            search_results = scraper.search(title_umlaut, year)
         if not search_results:
             search_results = scraper.search(title,str(int(year)-1))
         if not search_results:
             search_results = scraper.search(title,str(int(year)+1))
-        if not search_results and title != title_umlaut:
-            search_results = scraper.search(title_umlaut, year)    
     if not search_results and title != title_umlaut:
         search_results = scraper.search(title_umlaut)
     if not search_results:
@@ -173,6 +173,7 @@ def parse_lookup_string(uniqueids):
 
 def run():
     params = get_params(sys.argv[1:])
+    log("Calling TMDB Plugin with xxx: " + repr(sys.argv) + " yyy " + repr(sys.argv[1:]) +  " zzz " + repr(params), xbmc.LOGWARNING)
     enddir = True
     if 'action' in params:
         settings = ADDON_SETTINGS if not params.get('pathSettings') else \

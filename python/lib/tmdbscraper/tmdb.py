@@ -39,12 +39,18 @@ class TMDBMovieScraper(object):
         urls = self.urls
 
         def is_best(item):
-            return item['title'].lower() == title and (
-                not year or item.get('release_date', '').startswith(year))
+            score = 0
+            if item['title'].lower() == title.lower():
+                score += 1            
+            if not year or item.get('release_date', '').startswith(year):
+                score += 1
+            return score
+                    
         if result:
             # move all `is_best` results at the beginning of the list, sort them by popularity (if found):
-            bests_first = sorted([item for item in result if is_best(item)], key=lambda k: k.get('popularity',0), reverse=True)
-            result = bests_first + [item for item in result if item not in bests_first]
+            bests1_first = sorted([item for item in result if is_best(item) == 1], key=lambda k: k.get('popularity',0), reverse=True)
+            bests2_first = sorted([item for item in result if is_best(item) == 2], key=lambda k: k.get('popularity',0), reverse=True)
+            result = bests1_first + bests2_first + [item for item in result if item not in bests1_first+bests2_first]
 
         for item in result:
             if item.get('poster_path'):
