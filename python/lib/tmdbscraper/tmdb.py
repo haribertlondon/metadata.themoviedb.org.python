@@ -50,7 +50,7 @@ class TMDBMovieScraper(object):
             # move all `is_best` results at the beginning of the list, sort them by popularity (if found):
             bests1_first = sorted([item for item in result if is_best(item) == 1], key=lambda k: k.get('popularity',0), reverse=True)
             bests2_first = sorted([item for item in result if is_best(item) == 2], key=lambda k: k.get('popularity',0), reverse=True)
-            result = bests1_first + bests2_first + [item for item in result if item not in bests1_first+bests2_first]
+            result = bests2_first + bests1_first + [item for item in result if item not in bests1_first+bests2_first]
 
         for item in result:
             if item.get('poster_path'):
